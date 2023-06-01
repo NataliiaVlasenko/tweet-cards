@@ -1,10 +1,13 @@
-
+import welcome from "../../img/messages.png";
+import {HomeContainer, WelcomeTitle} from './HomePage.styled';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <HomeContainer>
+        <img src={welcome} alt="welcomLogo" />
+      <WelcomeTitle>Let`s Tweet!</WelcomeTitle>
+      
+    </HomeContainer>
   );
 };
 

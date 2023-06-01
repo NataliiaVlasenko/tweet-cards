@@ -3,19 +3,20 @@ import { getTweets } from "../../service/serviceApi";
 import Tweets from "../../components/Cards/Cards";
 import "./cards.css";
 import { Link } from "react-router-dom";
-import { ColorRing } from "react-loader-spinner";
+import Loader from '../../components/Loader';
 
-let numCards = 3;
+let cardsCount = 3;
 
-const Cards = () => {
+const CardsPage = () => {
+
   const [dataTweets, setTweets] = useState([]);
   const [pageTweets, setPageTweets] = useState([]);
   const [filtr, setFiltr] = useState(true);
 
   const addMore = () => {
     if (pageTweets.length < dataTweets.length) {
-      numCards += 3;
-      setPageTweets(dataTweets.slice(0, numCards));
+      cardsCount += 3;
+      setPageTweets(dataTweets.slice(0, cardsCount));
     }
     if (dataTweets.length <= pageTweets.length + 1) {
       setFiltr(false);
@@ -28,9 +29,11 @@ const Cards = () => {
 
   useEffect(() => {
     if (dataTweets.length > 0) {
-      setPageTweets(dataTweets.slice(0, numCards));
+      setPageTweets(dataTweets.slice(0, cardsCount));
     }
   }, [dataTweets]);
+
+
 
   const filter = (e) => {
     switch (e.target.value) {
@@ -52,17 +55,7 @@ const Cards = () => {
   };
 
   return dataTweets.length <= 0 ? (
-    <div className="loader">
-      <ColorRing
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-      />
-    </div>
+    <Loader/>
   ) : (
     <section className="section">
       <div className="section__btn--back">
@@ -98,4 +91,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default CardsPage;

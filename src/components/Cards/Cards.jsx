@@ -5,7 +5,7 @@ import logo from "../../img/Logo.png";
 import { putTweets } from "../../service/serviceApi";
 import { useState } from "react";
 
-const Tweets = ({ props }) => {
+const Card = ({ props }) => {
   const [dataTweets, setTweets] = useState(props.followers);
   const [folow, setFolow] = useState(props.following);
 
@@ -59,4 +59,4 @@ const Tweets = ({ props }) => {
   );
 };
 
-export default Tweets;
+export default Card;
