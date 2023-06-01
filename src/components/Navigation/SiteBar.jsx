@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
-import {Header} from './SiteBar.styled';
+
+import {Header, Link} from './SiteBar.styled';
 
 const SiteBar = () => {
   return (
     <Header>
-      <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/tweets"}>Tweets</NavLink>
+      <Link to={"/"}>Home</Link>
+      <Link to={"/tweets"}>Tweets</Link>
     </Header>
   );
 };

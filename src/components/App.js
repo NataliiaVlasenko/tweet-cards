@@ -3,17 +3,17 @@ import { lazy } from "react";
 
 const Layout = lazy(() => import("./Layout"));
 const Cards = lazy(() => import("../pages/CardsPage/Cards"));
-const Home = lazy(() => import("../pages/HomePage/HomePage"));
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 
 function App() {
   return (
     <>
     <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route path="/tweets" element={<Cards />} /> 
         
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
       </>
