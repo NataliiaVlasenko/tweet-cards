@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { getTweets } from "../../service/serviceApi";
-import Tweets from "../../components/Cards/Cards";
-import "./cards.css";
-import { Link } from "react-router-dom";
-import Loader from '../../components/Loader';
+import Card from "../../components/Cards/Card";
+
+import { FaAngleLeft } from "react-icons/fa";
+
+import Loader from "../../components/Loader";
+import {
+  Section,
+  FiltrContainer,
+  GoBackBtn,
+  Filtr,
+  Select,
+  CardsList,
+  LoadMoreBtn,
+} from "./CardsPage.styled";
 
 let cardsCount = 3;
 
 const CardsPage = () => {
-
   const [dataTweets, setTweets] = useState([]);
   const [pageTweets, setPageTweets] = useState([]);
-  const [filtr, setFiltr] = useState(true);
+  const [onFilter, setFiltr] = useState(true);
 
   const addMore = () => {
     if (pageTweets.length < dataTweets.length) {
@@ -33,7 +42,7 @@ const CardsPage = () => {
     }
   }, [dataTweets]);
 
-
+  
 
   const filter = (e) => {
     switch (e.target.value) {
@@ -55,39 +64,34 @@ const CardsPage = () => {
   };
 
   return dataTweets.length <= 0 ? (
-    <Loader/>
+    <Loader />
   ) : (
-    <section className="section">
-      <div className="section__btn--back">
-        <Link to="/" className="goBack">
-          Back
-        </Link>
-        <div>
-          <label className="filtr">
-            Fiter Cards
-            <select id="folow" onChange={filter}>
-              <option value="all">all</option>
-              <option value="follow">follow</option>
-              <option value="followings">followings</option>
-            </select>
-          </label>
-        </div>
-      </div>
-      <ul className="cards">
-        {pageTweets.length > 0 ? (
-          pageTweets.map((tweets) => <Tweets props={tweets} key={tweets.id} />)
-        ) : (
-          <li></li>
-        )}
-      </ul>
-      <div className="addMore">
-        {
-          <button onClick={addMore} className={filtr ? "addMoreBtn" : "none"}>
-            Add More
-          </button>
-        }
-      </div>
-    </section>
+    <Section>
+      <FiltrContainer>
+        <GoBackBtn to="/">
+          <FaAngleLeft />
+        </GoBackBtn>
+
+        <Filtr>
+          Filter cards
+          <Select id="follow" onChange={filter}>
+            <option value="all">all</option>
+            <option value="follow">follow</option>
+            <option value="followings">followings</option>
+          </Select>
+        </Filtr>
+      </FiltrContainer>
+
+      <CardsList>
+        {pageTweets.map((tweets) => (
+          <Card props={tweets} key={tweets.id} />
+        ))}
+      </CardsList>
+
+{onFilter ? <LoadMoreBtn onClick={addMore}>Load more</LoadMoreBtn> : <></>}
+
+      
+    </Section>
   );
 };
 

@@ -10,10 +10,12 @@ export const Header = styled.div`
   gap: 15px;
   color: #EBD8FF;
   font-family: "Montserrat", sans-serif;
+  font-size: 20px;
 `;
 
 export const Link = styled(NavLink)`
   color: #EBD8FF;
+  text-decoration: none;
   &: hover {
     color: #5CD3A8;
   }
