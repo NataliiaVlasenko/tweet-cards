@@ -47,12 +47,17 @@ export const Filtr = styled.label`
   &:hover {
     color: #5cd3a8;
   }
-`;
+
+ `;
 
 export const Select = styled.select`
-margin-left: 5px;
-border: 0;
+position: relative;
+  display: inline-block;
+cursor: pointer;
+margin-left:10px;
+border: none;
 `;
+
 
 export const CardsList = styled.ul`
 display: grid;

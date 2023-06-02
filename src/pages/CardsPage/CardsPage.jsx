@@ -22,7 +22,7 @@ const CardsPage = () => {
   const [pageTweets, setPageTweets] = useState([]);
   const [onFilter, setFiltr] = useState(true);
 
-  const addMore = () => {
+  const loadMore = () => {
     if (pageTweets.length < dataTweets.length) {
       cardsCount += 3;
       setPageTweets(dataTweets.slice(0, cardsCount));
@@ -42,13 +42,12 @@ const CardsPage = () => {
     }
   }, [dataTweets]);
 
-  
-
   const filter = (e) => {
     switch (e.target.value) {
       case "follow":
         setPageTweets(dataTweets.filter((tweets) => !tweets.following));
         setFiltr(false);
+
         break;
       case "followings":
         setPageTweets(dataTweets.filter((tweets) => tweets.following));
@@ -75,7 +74,7 @@ const CardsPage = () => {
         <Filtr>
           Filter cards
           <Select id="follow" onChange={filter}>
-            <option value="all">all</option>
+            <option value="all">show all</option>
             <option value="follow">follow</option>
             <option value="followings">followings</option>
           </Select>
@@ -88,9 +87,7 @@ const CardsPage = () => {
         ))}
       </CardsList>
 
-{onFilter ? <LoadMoreBtn onClick={addMore}>Load more</LoadMoreBtn> : <></>}
-
-      
+      {onFilter && <LoadMoreBtn onClick={loadMore}>Load more</LoadMoreBtn>}
     </Section>
   );
 };
