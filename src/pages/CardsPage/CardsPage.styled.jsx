@@ -56,11 +56,12 @@ border: 0;
 
 export const CardsList = styled.ul`
 display: grid;
-max-width: calc(100vw - 48px)/3;
-grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+width: calc(100vw - 3 * 48px);
+grid-template-columns: repeat(3, 380px);
 grid-gap: 48px;
 margin: 0 auto 0 auto;
-margin-bottom: 0;
+
+justify-content: center;
 padding: 0;
 list-style: none;
 
