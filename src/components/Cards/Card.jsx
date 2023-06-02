@@ -42,13 +42,13 @@ const Card = ({ props }) => {
         <img src={props.avatar || avatarDefault} alt="" width={62} />
       </Avatar>
       <Tweets>
-        <div>{props.tweets} TWEETS</div>
+        <div>{props.tweets} tweets</div>
         <div>
-          {new Intl.NumberFormat("en-IN").format(dataTweets)} FOLLOWERS{" "}
+          {new Intl.NumberFormat("en-IN").format(dataTweets)} followers{" "}
         </div>
       </Tweets>
       <ButtonContainer>
-       <Button data-active={follow} onClick={() => following(props)}>{follow ? "following" :"follow"}</Button>
+       <Button onClick={() => following(props)}>{follow ? "following" :"follow"}</Button>
 
       </ButtonContainer>
     </CardItem>

@@ -10,7 +10,7 @@ export const CardItem = styled.li`
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
 
-  max-width: 380px;
+  width: 380px;
   position: relative;
   font-family: "Montserrat", sans-serif;
 `;
@@ -29,7 +29,7 @@ export const Avatar = styled.div`
   display: block;
   content: " ";
   height: 7px;
-  max-width: 380px;
+  width: 380px;
   position: relative;
 
   box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
@@ -105,8 +105,12 @@ export const Button = styled.button`
   line-height: 22px;
   text-transform: uppercase;
   color: #373737;
+  transition: background 9999999s;
 
-  &[data-active="true"] {
-    background-color: #5cd3a8;
+  &:active {
+    background: #5cd3a8;
+    transition: background 0s;
+    
+    
   }
 `;
