@@ -105,12 +105,9 @@ export const Button = styled.button`
   line-height: 22px;
   text-transform: uppercase;
   color: #373737;
-  transition: background 9999999s;
 
-  &:active {
-    background: #5cd3a8;
-    transition: background 0s;
-    
-    
+  &[data-active="true"] {
+    background-color: #5cd3a8;
+  }
   }
 `;

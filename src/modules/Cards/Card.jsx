@@ -1,6 +1,6 @@
-import messageImg from "../../img/messages.png";
-import avatarDefault from "../../img/avatar.png";
-import logo from "../../img/Logo.png";
+import messageImg from "../../assets/img/messages.png";
+import avatarDefault from "../../assets/img/avatar.png";
+import logo from "../../assets/img/Logo.png";
 
 import {
   CardItem,
@@ -12,7 +12,7 @@ import {
   Button,
 } from "./Card.styled";
 
-import { putTweets } from "../../service/serviceApi";
+import { putTweets } from "../../services/serviceApi";
 import { useState } from "react";
 
 const Card = ({ props }) => {
@@ -48,7 +48,8 @@ const Card = ({ props }) => {
         </div>
       </Tweets>
       <ButtonContainer>
-       <Button onClick={() => following(props)}>{follow ? "following" :"follow"}</Button>
+         <Button data-active={follow} onClick={() => following(props)}>{follow ? "following" :"follow"}</Button>
+       
 
       </ButtonContainer>
     </CardItem>

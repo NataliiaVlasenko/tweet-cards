@@ -1,4 +1,4 @@
-import welcome from "../../img/messages.png";
+import welcome from "../../assets/img/messages.png";
 import {HomeContainer, WelcomeTitle} from './HomePage.styled';
 
 const HomePage = () => {

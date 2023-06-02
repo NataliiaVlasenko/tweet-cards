@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTweets } from "../../service/serviceApi";
-import Card from "../../components/Cards/Card";
-
+import { getTweets } from "../../services/serviceApi";
+import Card from "../../modules/Cards/Card";
 import { FaAngleLeft } from "react-icons/fa";
 
 import Loader from "../../components/Loader";
@@ -20,15 +19,11 @@ let cardsCount = 3;
 const CardsPage = () => {
   const [dataTweets, setTweets] = useState([]);
   const [pageTweets, setPageTweets] = useState([]);
-  const [onFilter, setFiltr] = useState(true);
 
   const loadMore = () => {
     if (pageTweets.length < dataTweets.length) {
       cardsCount += 3;
       setPageTweets(dataTweets.slice(0, cardsCount));
-    }
-    if (dataTweets.length <= pageTweets.length + 1) {
-      setFiltr(false);
     }
   };
 
@@ -46,16 +41,15 @@ const CardsPage = () => {
     switch (e.target.value) {
       case "follow":
         setPageTweets(dataTweets.filter((tweets) => !tweets.following));
-        setFiltr(false);
 
         break;
       case "followings":
         setPageTweets(dataTweets.filter((tweets) => tweets.following));
-        setFiltr(false);
+
         break;
       case "all":
         setPageTweets(dataTweets);
-        setFiltr(false);
+
         break;
       default:
         break;
@@ -87,7 +81,9 @@ const CardsPage = () => {
         ))}
       </CardsList>
 
-      {onFilter && <LoadMoreBtn onClick={loadMore}>Load more</LoadMoreBtn>}
+      {cardsCount === pageTweets.length && (
+        <LoadMoreBtn onClick={loadMore}>Load more</LoadMoreBtn>
+      )}
     </Section>
   );
 };
