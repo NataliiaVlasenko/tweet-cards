@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { getTweets } from "../../services/serviceApi";
+import { getTweets, getFollowingTweets } from "../../services/serviceApi";
 import Card from "../../modules/Cards/Card";
 import { FaAngleLeft } from "react-icons/fa";
 
-import Loader from "../../components/Loader";
 import {
   Section,
   FiltrContainer,
@@ -19,6 +18,40 @@ let cardsCount = 3;
 const CardsPage = () => {
   const [dataTweets, setTweets] = useState([]);
   const [pageTweets, setPageTweets] = useState([]);
+  const [filtrValue, setFiltrValue] = useState("all");
+
+  useEffect(() => {
+    const filter = (filtrValue) => {
+      switch (filtrValue) {
+
+        case "follow":
+          getFollowingTweets(false).then((data) => setTweets(data));
+          break;
+
+        case "followings":
+          getFollowingTweets(true).then(
+            (data) => setTweets(data)
+            
+            );
+         break;
+
+        case "all":
+          getTweets().then((data) => setTweets(data));
+          break;
+        default:
+          break;
+      }
+    };
+    
+    filter(filtrValue);
+  }, [filtrValue]);
+
+  useEffect(() => {
+    setPageTweets(dataTweets);
+    if (dataTweets.length > 0) {
+      setPageTweets(dataTweets.slice(0, cardsCount));
+    }
+  }, [dataTweets]);
 
   const loadMore = () => {
     if (pageTweets.length < dataTweets.length) {
@@ -27,38 +60,11 @@ const CardsPage = () => {
     }
   };
 
-  useEffect(() => {
-    getTweets().then((data) => setTweets(data));
-  }, []);
-
-  useEffect(() => {
-    if (dataTweets.length > 0) {
-      setPageTweets(dataTweets.slice(0, cardsCount));
-    }
-  }, [dataTweets]);
-
-  const filter = (e) => {
-    switch (e.target.value) {
-      case "follow":
-        setPageTweets(dataTweets.filter((tweets) => !tweets.following));
-
-        break;
-      case "followings":
-        setPageTweets(dataTweets.filter((tweets) => tweets.following));
-
-        break;
-      case "all":
-        setPageTweets(dataTweets);
-
-        break;
-      default:
-        break;
-    }
+  const setFilter = (e) => {
+    setFiltrValue(e.target.value.toString());
   };
 
-  return dataTweets.length <= 0 ? (
-    <Loader />
-  ) : (
+  return (
     <Section>
       <FiltrContainer>
         <GoBackBtn to="/">
@@ -67,7 +73,7 @@ const CardsPage = () => {
 
         <Filtr>
           Filter cards
-          <Select id="follow" onChange={filter}>
+          <Select id="follow" onChange={setFilter}>
             <option value="all">show all</option>
             <option value="follow">follow</option>
             <option value="followings">followings</option>
